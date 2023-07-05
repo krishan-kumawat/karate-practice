@@ -1,9 +1,22 @@
 Feature:
 
 Scenario:
-    Given def a = 10
-    And def b = 20
-    * def json = """{"name" : "Krishan"}"""
-    Then print json
-    * match a+b == 30
+    * url 'https://httpbin.org/anything'
+    * request {mykey  : 'myValue'}
+    * method post
+    * print 'this is response',response
 
+Scenario:
+    * url 'https://httpbin.org/anything'
+    * request {mykey  : 'myValue'}
+    * method post
+    * status 200
+    * match response.json =={mykey :'myValu'}
+
+Scenario:
+    * url 'https://dummyjson.com/products'
+    # * request {mykey  : 'myValue'}
+    * method get
+    * status 200
+    * print "this is dummyjson response", response
+    # * match response.json =={mykey :'myValu'}   
